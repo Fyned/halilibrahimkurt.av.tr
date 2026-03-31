@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import SEOHead from '../../components/common/SEOHead';
 import Breadcrumb from '../../components/common/Breadcrumb';
 import Card from '../../components/common/Card';
@@ -55,24 +54,17 @@ export default function FaaliyetAlanlari() {
             </div>
 
             {/* Kartlar */}
-            <motion.div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {faaliyetAlanlari.map((alan, index) => (
-                <motion.div
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {faaliyetAlanlari.map((alan) => (
+                <Card
                   key={alan.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Card
-                    baslik={alan.baslik}
-                    aciklama={alan.kisaAciklama}
-                    link={alan.link}
-                    ikon={alan.ikon}
-                  />
-                </motion.div>
+                  baslik={alan.baslik}
+                  aciklama={alan.kisaAciklama}
+                  link={alan.link}
+                  ikon={alan.ikon}
+                />
               ))}
-            </motion.div>
+            </div>
 
             {/* Alt Bilgi */}
             <div className="mt-16 bg-gradient-to-r from-primary-50 to-accent-50 rounded-2xl p-8 md:p-12">

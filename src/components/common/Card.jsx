@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
 export default function Card({ baslik, aciklama, link, ikon }) {
   const icons = {
@@ -17,39 +16,35 @@ export default function Card({ baslik, aciklama, link, ikon }) {
       to={link}
       className="group block"
     >
-      <motion.div
-        className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-accent-200 relative overflow-hidden"
-        whileHover={{ y: -5 }}
-        transition={{ duration: 0.2 }}
-      >
-      {/* Dekoratif Arka Plan */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-50 to-transparent rounded-bl-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
+      <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 hover:border-accent-200 relative overflow-hidden">
+        {/* Dekoratif Arka Plan */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-50 to-transparent rounded-bl-full opacity-50 group-hover:opacity-100 transition-opacity"></div>
 
-      <div className="relative">
-        {/* İkon Container */}
-        <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-primary-500/20">
-          {IconComponent()}
+        <div className="relative">
+          {/* İkon Container */}
+          <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-primary-500/20">
+            {IconComponent()}
+          </div>
+
+          {/* Başlık */}
+          <h3 className="text-xl font-serif font-bold text-primary-500 group-hover:text-accent-600 transition-colors mb-3">
+            {baslik}
+          </h3>
+
+          {/* Açıklama */}
+          <p className="text-gray-600 leading-relaxed mb-6">
+            {aciklama}
+          </p>
+
+          {/* Link */}
+          <span className="inline-flex items-center text-accent-500 font-semibold group-hover:text-accent-600">
+            Detaylı Bilgi
+            <svg className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </span>
         </div>
-
-        {/* Başlık */}
-        <h3 className="text-xl font-serif font-bold text-primary-500 group-hover:text-accent-600 transition-colors mb-3">
-          {baslik}
-        </h3>
-
-        {/* Açıklama */}
-        <p className="text-gray-600 leading-relaxed mb-6">
-          {aciklama}
-        </p>
-
-        {/* Link */}
-        <span className="inline-flex items-center text-accent-500 font-semibold group-hover:text-accent-600">
-          Detaylı Bilgi
-          <svg className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </span>
       </div>
-      </motion.div>
     </Link>
   );
 }

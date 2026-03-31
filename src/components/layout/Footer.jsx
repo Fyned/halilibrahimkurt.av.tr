@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { avukatBilgileri } from '../../data/avukatBilgileri';
 import { navigasyon } from '../../data/faaliyetAlanlari';
 import logo from '../../assets/logo.svg';
@@ -10,13 +9,7 @@ export default function Footer() {
   return (
     <footer className="bg-primary-500 text-white">
       {/* Üst Kısım - CTA Banner */}
-      <motion.div
-        className="bg-primary-600"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
-      >
+      <div className="bg-primary-600">
         <div className="container-custom py-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div>
@@ -38,22 +31,13 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Ana Footer İçeriği */}
       <div className="container-custom py-16">
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Avukat Bilgileri */}
-          <motion.div
-            className="lg:col-span-1"
-            variants={{ visible: { opacity: 1, y: 0 } }}
-            initial={{ opacity: 0, y: 20 }}
-          >
+          <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-6">
               <img src={logo} alt={avukatBilgileri.tamAd} className="h-16 w-auto brightness-0 invert" />
             </Link>
@@ -65,13 +49,10 @@ export default function Footer() {
               </svg>
               Baro Sicil No: {avukatBilgileri.baroSicilNo}
             </div>
-          </motion.div>
+          </div>
 
           {/* İletişim */}
-          <motion.div
-            variants={{ visible: { opacity: 1, y: 0 } }}
-            initial={{ opacity: 0, y: 20 }}
-          >
+          <div>
             <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2">
               <span className="w-8 h-0.5 bg-accent-500"></span>
               İletişim
@@ -117,13 +98,10 @@ export default function Footer() {
                 </div>
               </li>
             </ul>
-          </motion.div>
+          </div>
 
           {/* Hızlı Linkler */}
-          <motion.div
-            variants={{ visible: { opacity: 1, y: 0 } }}
-            initial={{ opacity: 0, y: 20 }}
-          >
+          <div>
             <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2">
               <span className="w-8 h-0.5 bg-accent-500"></span>
               Hızlı Linkler
@@ -143,13 +121,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Hizmet Bölgeleri */}
-          <motion.div
-            variants={{ visible: { opacity: 1, y: 0 } }}
-            initial={{ opacity: 0, y: 20 }}
-          >
+          <div>
             <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2">
               <span className="w-8 h-0.5 bg-accent-500"></span>
               Hizmet Bölgeleri
@@ -164,8 +139,8 @@ export default function Footer() {
                 </span>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* Alt Kısım */}
