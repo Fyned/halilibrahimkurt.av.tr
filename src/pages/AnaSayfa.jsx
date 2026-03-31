@@ -9,7 +9,7 @@ export default function AnaSayfa() {
     <>
       <SEOHead
         title="Ana Sayfa"
-        description="Av. Halil İbrahim Kurt - İstanbul 2 Nolu Barosu. Kira hukuku ve taşınmaz hukuku alanlarında hukuki danışmanlık. Pendik, Gebze ve İstanbul Anadolu Yakası."
+        description="Av. Halil İbrahim Kurt - İstanbul Barosu. Boşanma, tazminat, iş hukuku, icra ve iflas, kira hukuku, miras hukuku alanlarında hukuki danışmanlık."
         canonical="/"
       />
       <AttorneySchema />

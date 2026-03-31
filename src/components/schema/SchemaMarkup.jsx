@@ -8,17 +8,10 @@ export function AttorneySchema() {
     "@type": "Attorney",
     "name": avukatBilgileri.tamAd,
     "telephone": avukatBilgileri.telefon,
+    "email": avukatBilgileri.email,
     "url": avukatBilgileri.website,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": `${avukatBilgileri.adres.sokak} ${avukatBilgileri.adres.bina}`,
-      "addressLocality": avukatBilgileri.adres.ilce,
-      "addressRegion": avukatBilgileri.adres.il,
-      "postalCode": avukatBilgileri.adres.postaKodu,
-      "addressCountry": avukatBilgileri.adres.ulke
-    },
     "areaServed": avukatBilgileri.hizmetBolgeleri,
-    "knowsAbout": ["Kira Hukuku", "Tahliye Davalari", "Kira Tespit Davasi"],
+    "knowsAbout": ["Boşanma Hukuku", "Tazminat Hukuku", "İş Hukuku", "İcra ve İflas Hukuku", "Kira Hukuku", "Miras Hukuku"],
     "priceRange": "$$"
   };
 
@@ -38,20 +31,8 @@ export function LocalBusinessSchema() {
     "@type": "LegalService",
     "name": avukatBilgileri.tamAd,
     "telephone": avukatBilgileri.telefon,
+    "email": avukatBilgileri.email,
     "url": avukatBilgileri.website,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": `${avukatBilgileri.adres.sokak} ${avukatBilgileri.adres.bina}`,
-      "addressLocality": avukatBilgileri.adres.ilce,
-      "addressRegion": avukatBilgileri.adres.il,
-      "postalCode": avukatBilgileri.adres.postaKodu,
-      "addressCountry": avukatBilgileri.adres.ulke
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "40.8919",
-      "longitude": "29.2614"
-    },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -59,7 +40,7 @@ export function LocalBusinessSchema() {
       "closes": "18:00"
     },
     "areaServed": avukatBilgileri.hizmetBolgeleri.map(bolge => ({
-      "@type": "City",
+      "@type": "Country",
       "name": bolge
     }))
   };
