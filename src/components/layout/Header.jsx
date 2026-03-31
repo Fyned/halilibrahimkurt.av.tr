@@ -6,11 +6,7 @@ import logo from '../../assets/logo.svg';
 
 function RandevuPopup({ isOpen, onClose }) {
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
@@ -109,6 +105,11 @@ export default function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [randevuOpen, setRandevuOpen] = useState(false);
   const dropdownTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
 
   const navLinkClass = ({ isActive }) =>
     `relative py-2 transition-colors duration-200 font-medium text-sm uppercase tracking-wide ${
@@ -236,75 +237,118 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-primary-500 hover:bg-gray-100 rounded-lg transition-colors"
+            className="lg:hidden p-2 text-primary-500 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Menü"
           >
-            {mobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
           </button>
         </div>
+      </div>
+    </header>
 
-        {/* Mobile Navigation */}
+    {/* Mobile Menu Overlay */}
+    {mobileMenuOpen && (
+      <div className="fixed inset-0 z-[90] lg:hidden" onClick={() => setMobileMenuOpen(false)}>
+        <div className="absolute inset-0 bg-black/50 animate-[fadeIn_0.15s_ease-out]" />
         <div
-          className={`lg:hidden overflow-hidden border-t border-gray-100 transition-all duration-300 ease-in-out ${
-            mobileMenuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0 border-t-0'
-          }`}
+          className="absolute inset-x-0 top-0 bg-white will-change-transform animate-[slideDown_0.3s_cubic-bezier(0.34,1.56,0.64,1)]"
+          style={{ transformOrigin: 'top center' }}
+          onClick={(e) => e.stopPropagation()}
         >
-          <div className="py-4">
+          {/* Menu Header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center">
+              <img src={logo} alt={avukatBilgileri.tamAd} className="h-14 w-auto" />
+            </Link>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-xl flex items-center justify-center transition-colors cursor-pointer"
+            >
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Menu Items */}
+          <nav className="px-4 py-4 space-y-1 max-h-[60vh] overflow-y-auto">
             {navigasyon.map((item) => (
               <div key={item.baslik}>
                 <NavLink
                   to={item.link}
                   className={({ isActive }) =>
-                    `block py-3 px-4 font-medium rounded-lg transition-colors ${
+                    `flex items-center gap-3 py-3.5 px-4 rounded-xl font-medium text-base transition-colors ${
                       isActive
-                        ? 'text-accent-500 bg-accent-50'
-                        : 'text-gray-700 hover:bg-gray-50'
+                        ? 'text-accent-600 bg-accent-50'
+                        : 'text-gray-700 hover:bg-gray-50 active:bg-gray-100'
                     }`
                   }
                   onClick={() => !item.altMenu && setMobileMenuOpen(false)}
                 >
                   {item.baslik}
+                  {item.altMenu && (
+                    <svg className="w-4 h-4 ml-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  )}
                 </NavLink>
                 {item.altMenu && (
-                  <div className="pl-4 mt-1 mb-2">
+                  <div className="ml-4 pl-4 border-l-2 border-gray-100 space-y-1 mb-2">
                     {item.altMenu.map((alt) => (
                       <NavLink
                         key={alt.baslik}
                         to={alt.link}
-                        className="block py-2 px-4 text-gray-600 hover:text-primary-500 transition-colors"
+                        className={({ isActive }) =>
+                          `block py-2.5 px-3 rounded-lg text-sm transition-colors ${
+                            isActive
+                              ? 'text-accent-600 bg-accent-50'
+                              : 'text-gray-500 hover:text-primary-500 hover:bg-gray-50'
+                          }`
+                        }
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        → {alt.baslik}
+                        {alt.baslik}
                       </NavLink>
                     ))}
                   </div>
                 )}
               </div>
             ))}
-            <div className="mt-4 pt-4 border-t border-gray-100 px-4">
-              <a
-                href={avukatBilgileri.telefonLink}
-                className="flex items-center justify-center gap-2 bg-primary-500 text-white py-3 rounded-lg font-semibold"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                {avukatBilgileri.telefonGosterim}
-              </a>
+          </nav>
+
+          {/* Bottom Actions */}
+          <div className="px-4 pb-6 pt-2 space-y-3 border-t border-gray-100">
+            <button
+              onClick={() => { setMobileMenuOpen(false); setRandevuOpen(true); }}
+              className="flex items-center justify-center gap-2 w-full bg-accent-500 hover:bg-accent-600 text-white py-3.5 rounded-xl font-semibold text-base transition-colors cursor-pointer"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Randevu Al
+            </button>
+            <a
+              href={avukatBilgileri.telefonLink}
+              className="flex items-center justify-center gap-2 w-full bg-primary-500 text-white py-3.5 rounded-xl font-semibold text-base"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              {avukatBilgileri.telefonGosterim}
+            </a>
+            <div className="flex items-center justify-center gap-2 text-xs text-gray-400 pt-1">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {avukatBilgileri.calismaGunleri}: {avukatBilgileri.calismaSaatleri}
             </div>
           </div>
         </div>
       </div>
-    </header>
+    )}
     </>
   );
 }
