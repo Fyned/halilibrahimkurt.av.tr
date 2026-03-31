@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #f0f4f8;
+  --color-primary-100: #d9e2ec;
+  --color-primary-200: #bcccdc;
+  --color-primary-300: #9fb3c8;
+  --color-primary-400: #829ab1;
+  --color-primary-500: #1a365d;
+  --color-primary-600: #153051;
+  --color-primary-700: #102545;
+  --color-primary-800: #0b1a2e;
+  --color-primary-900: #050d17;
+
+  --color-accent-300: #e6c06a;
+  --color-accent-400: #d4a54a;
+  --color-accent-500: #b8860b;
+  --color-accent-600: #9a7209;
+  --color-accent-700: #7c5c07;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    @apply text-gray-800 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply bg-primary-500 text-white px-6 py-3 rounded-lg font-medium
+           hover:bg-primary-600 transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-accent-500 text-white px-6 py-3 rounded-lg font-medium
+           hover:bg-accent-600 transition-colors duration-200;
+  }
+
+  .link-nav {
+    @apply text-primary-500 hover:text-accent-500 transition-colors duration-200 font-medium;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-6;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-primary-500 mb-6;
+    font-family: var(--font-serif);
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-600 mb-8;
+  }
+}
