@@ -74,9 +74,9 @@
 }
 
 @keyframes blop {
-  0% { transform: scale(0.2) translateY(-30px); opacity: 0; transform-origin: top right; }
-  50% { transform: scale(1.06); opacity: 1; }
-  70% { transform: scale(0.96); }
+  0% { transform: scale(0.2); opacity: 0; }
+  60% { transform: scale(1.04); opacity: 1; }
+  80% { transform: scale(0.97); }
   100% { transform: scale(1); }
 }
 

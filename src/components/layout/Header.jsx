@@ -18,14 +18,13 @@ function RandevuPopup({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-end pt-20 pr-4 md:pr-8 lg:pr-16" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-[fadeIn_0.2s_ease-out]" />
+      <div className="absolute inset-0 bg-black/50 animate-[fadeIn_0.15s_ease-out]" />
       <div
-        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-[blop_0.35s_cubic-bezier(0.34,1.56,0.64,1)]"
+        className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden will-change-transform animate-[blop_0.3s_cubic-bezier(0.34,1.56,0.64,1)]"
         style={{ transformOrigin: 'top right' }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-gradient-to-br from-primary-500 to-primary-700 p-6 text-white relative">
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-accent-500/20 rounded-full blur-2xl" />
           <button
             onClick={onClose}
             className="absolute top-4 right-4 z-20 w-8 h-8 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors cursor-pointer"
