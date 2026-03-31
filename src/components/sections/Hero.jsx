@@ -101,8 +101,8 @@ export default function Hero() {
       </div>
 
       {/* Alt Dalga */}
-      <div className="absolute -bottom-px left-0 right-0">
-        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="block w-full h-auto">
+      <div className="absolute -bottom-px -left-1 -right-1 overflow-hidden">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" className="block w-[calc(100%+2px)] h-auto relative -left-px">
           <path d="M0 100V60C240 20 480 0 720 20C960 40 1200 80 1440 60V100H0Z" fill="#f9fafb"/>
         </svg>
       </div>
