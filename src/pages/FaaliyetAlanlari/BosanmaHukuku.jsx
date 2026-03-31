@@ -56,8 +56,8 @@ export default function BosanmaHukuku() {
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             {/* Giriş */}
-            <div className="relative bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 md:p-10 mb-12 overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-accent-500/10 rounded-bl-full"></div>
+            <div className="relative bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-10 mb-12 overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-50 rounded-bl-full"></div>
               <div className="relative">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 bg-primary-500 rounded-xl flex items-center justify-center">

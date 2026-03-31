@@ -67,7 +67,7 @@ export default function FaaliyetAlanlari() {
             </div>
 
             {/* Alt Bilgi */}
-            <div className="mt-16 bg-gradient-to-r from-primary-50 to-accent-50 rounded-2xl p-8 md:p-12">
+            <div className="mt-16 bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-12">
               <div className="flex flex-col md:flex-row items-center gap-6 text-center md:text-left">
                 <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0">
                   <svg className="w-8 h-8 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

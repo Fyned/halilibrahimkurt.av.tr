@@ -12,6 +12,9 @@
   --color-primary-800: #0b1a2e;
   --color-primary-900: #050d17;
 
+  --color-accent-50: #fdf8eb;
+  --color-accent-100: #f9edcc;
+  --color-accent-200: #f3dba0;
   --color-accent-300: #e6c06a;
   --color-accent-400: #d4a54a;
   --color-accent-500: #b8860b;
@@ -29,7 +32,7 @@
 
   body {
     font-family: var(--font-sans);
-    @apply text-gray-800 antialiased;
+    @apply bg-white text-gray-800 antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
