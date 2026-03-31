@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { avukatBilgileri } from '../../data/avukatBilgileri';
 import { navigasyon } from '../../data/faaliyetAlanlari';
@@ -7,24 +7,7 @@ import logo from '../../assets/logo.svg';
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const dropdownTimeoutRef = useRef(null);
-  const rafRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (rafRef.current) return;
-      rafRef.current = requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 50);
-        rafRef.current = null;
-      });
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
 
   const navLinkClass = ({ isActive }) =>
     `relative py-2 transition-colors duration-200 font-medium text-sm uppercase tracking-wide ${
@@ -49,43 +32,37 @@ export default function Header() {
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
       {/* Üst Bar */}
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-out will-change-[max-height,opacity] ${
-          scrolled ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'
-        }`}
-      >
-        <div className="bg-primary-500 text-white py-2 hidden md:block">
-          <div className="container-custom flex justify-between items-center text-sm">
-            <div className="flex items-center gap-6">
-              <a href={`mailto:${avukatBilgileri.email}`} className="flex items-center gap-2 hover:text-accent-400 transition-colors">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                {avukatBilgileri.email}
-              </a>
-              <span className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {avukatBilgileri.calismaGunleri}: {avukatBilgileri.calismaSaatleri}
-              </span>
-            </div>
-            <a
-              href={avukatBilgileri.telefonLink}
-              className="flex items-center gap-2 hover:text-accent-400 transition-colors font-semibold"
-            >
+      <div className="bg-primary-500 text-white py-2 hidden md:block">
+        <div className="container-custom flex justify-between items-center text-sm">
+          <div className="flex items-center gap-6">
+            <a href={`mailto:${avukatBilgileri.email}`} className="flex items-center gap-2 hover:text-accent-400 transition-colors">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              {avukatBilgileri.telefonGosterim}
+              {avukatBilgileri.email}
             </a>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {avukatBilgileri.calismaGunleri}: {avukatBilgileri.calismaSaatleri}
+            </span>
           </div>
+          <a
+            href={avukatBilgileri.telefonLink}
+            className="flex items-center gap-2 hover:text-accent-400 transition-colors font-semibold"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            {avukatBilgileri.telefonGosterim}
+          </a>
         </div>
       </div>
 
       {/* Ana Header */}
       <div className="container-custom">
-        <div className={`flex items-center justify-between transition-all duration-300 ease-out will-change-[padding] ${scrolled ? 'py-2' : 'py-4'}`}>
+        <div className="flex items-center justify-between py-3">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-4">
             <img
